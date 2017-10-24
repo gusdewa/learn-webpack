@@ -1,0 +1,24 @@
+{
+  "name": "learn-webpack",
+  "version": "1.0.0",
+  "description": "Personal project to learn webpack basic config",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gusdewa/learn-webpack.git"
+  },
+  "keywords": [
+    "Webpack",
+    "Bundling",
+    "Minification"
+  ],
+  "author": "gusdewa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gusdewa/learn-webpack/issues"
+  },
+  "homepage": "https://github.com/gusdewa/learn-webpack#readme"
+}
