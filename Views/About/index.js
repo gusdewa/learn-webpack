@@ -1,3 +1,4 @@
+import './styles.css';
 import module1 from './module1';
 
 console.log('This is About-Index.js');
