@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const { entriesJs } = require('./listFiles');
 
@@ -12,12 +13,17 @@ const config = {
   },
   module: {
     rules: [{
-      test: /\.(css|scss)$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'sass-loader',
-      ]
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: "css-loader"
+      }),
+    }, {
+      test: /\.scss$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: "sass-loader"
+      }),
     }, {
       enforce: 'pre',
       test: /\.js$/,
@@ -50,6 +56,7 @@ const config = {
       name: "manifest.js",
       minChunks: Infinity
     }),
+    new ExtractTextPlugin("styles.css"),    
   ],
 };
 
