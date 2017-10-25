@@ -9,11 +9,11 @@ var walkSync = function (dir, filelist, extension) {
   filelist = filelist || [];
   files.forEach(function (file) {
     if (fs.statSync(dir + '/' + file).isDirectory()) {
-      filelist = walkSync(dir + '/' + file + '/', filelist, extension);
+      filelist = walkSync(dir + '/' + file, filelist, extension);
     } else {
       if(file.includes('.') && file.split('.').includes(extension)) {
         const relativeDir = relativeFolderName + dir.split(relativeFolderName)[1];
-        filelist[`${relativeDir}${file}`] =  `./${relativeDir}`;
+        filelist[`${relativeDir}/${file}`] =  `./${relativeDir}`;
       }
     }
   });
@@ -21,8 +21,9 @@ var walkSync = function (dir, filelist, extension) {
 };
 
 const viewFolder = path.resolve(__dirname, relativeFolderName);
+const entriesJs = walkSync(viewFolder, {}, 'js')
 
+console.log(JSON.stringify(entriesJs, undefined, 2));
 module.exports = {
-  entriesJs: walkSync(viewFolder, {}, 'js'),
-  entriesCss: walkSync(viewFolder, {}, 'css'),
+  entriesJs
 };

@@ -5,35 +5,41 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 const { entriesJs } = require('./listFiles');
 
 const config = {
-  entry: Object.assign({}, entriesJs),
+  entry: entriesJs,
   output: {
     path: path.resolve(__dirname, 'wwwroot'),
     filename: '[name]',
   },
   module: {
     rules: [{
-      test: /\.css$/,
+      test: /\.(css|scss)$/,
       use: [
         'style-loader',
-        'css-loader'
+        'css-loader',
+        'sass-loader',
       ]
     }, {
-      test: /\.(png|svg|jpg|gif)$/,
-      use: [
-        'file-loader',
-      ]
+      enforce: 'pre',
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: 'eslint-loader',
     }, {
-      test: /\.(woff|woff2|eot|ttf|otf)$/,
-      use: [
-        'file-loader',
-      ]
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: 'babel-loader',
+    }, {
+      test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$/,
+      use: 'url-loader',
     }, {
       test: /\.txt$/,
       use: 'raw-loader',
     }]
   },
+  resolve: {
+    extensions: ['*', '.js'],
+    modules: ['Views/', 'node_modules']
+  },
   plugins: [
-    new MinifyPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendors.js",
       minChunks: function(module){
