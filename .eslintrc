@@ -1,0 +1,7 @@
+{
+  "extends": "steelbrain",
+  "rules": {
+    "semi": "off",
+    "linebreak-style": "off"
+  }
+}

@@ -23,7 +23,4 @@ var walkSync = function (dir, filelist, extension) {
 const viewFolder = path.resolve(__dirname, relativeFolderName);
 const entriesJs = walkSync(viewFolder, {}, 'js')
 
-console.log(JSON.stringify(entriesJs, undefined, 2));
-module.exports = {
-  entriesJs
-};
+module.exports = entriesJs;

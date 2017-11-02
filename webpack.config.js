@@ -1,9 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const MinifyPlugin = require("babel-minify-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const { entriesJs } = require('./listFiles');
+const entriesJs = require('./listFiles');
+
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css",
+});
 
 const config = {
   entry: entriesJs,
@@ -13,17 +16,15 @@ const config = {
   },
   module: {
     rules: [{
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: "css-loader"
-      }),
-    }, {
       test: /\.scss$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: "sass-loader"
-      }),
+      use: extractSass.extract({
+          use: [{
+              loader: "css-loader"
+          }, {
+              loader: "sass-loader"
+          }],
+          fallback: "style-loader"
+      })
     }, {
       enforce: 'pre',
       test: /\.js$/,
@@ -46,6 +47,7 @@ const config = {
     modules: ['Views/', 'node_modules']
   },
   plugins: [
+    extractSass,
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendors.js",
       minChunks: function(module){
@@ -56,7 +58,6 @@ const config = {
       name: "manifest.js",
       minChunks: Infinity
     }),
-    new ExtractTextPlugin("styles.css"),    
   ],
 };
 
