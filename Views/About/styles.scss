@@ -1,7 +1,9 @@
 $color1: #111111;
+$color2: red;
 
 body {
-  .h1 {
+  .h2 {
     color: $color1;
+    background-color: $color2; 
   }
 }

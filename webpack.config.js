@@ -5,7 +5,10 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const entriesJs = require('./listFiles');
 
 const extractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
+  filename: (getPath) => {
+    return getPath('[name].css').replace('.js', '');
+  },
+  allChunks: true,
 });
 
 const config = {
