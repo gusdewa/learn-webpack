@@ -35,8 +35,13 @@ const config = {
       use: 'eslint-loader',
     }, {
       test: /\.js$/,
-      exclude: /node_modules/,
-      use: 'babel-loader',
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015', 'stage-1']
+        }
+      }
     }, {
       test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$/,
       use: 'url-loader',

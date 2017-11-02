@@ -2,12 +2,10 @@ const path = require('path');
 const fs = require('fs');
 
 const relativeFolderName = 'Views';
-
-var walkSync = function (dir, filelist, extension) {
-  var fs = fs || require('fs'),
-    files = fs.readdirSync(dir);
+const walkSync = (dir, filelist, extension) => {
+  const files = fs.readdirSync(dir);
   filelist = filelist || [];
-  files.forEach(function (file) {
+  files.forEach((file) => {
     if (fs.statSync(dir + '/' + file).isDirectory()) {
       filelist = walkSync(dir + '/' + file, filelist, extension);
     } else {
