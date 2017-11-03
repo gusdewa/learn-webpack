@@ -1,7 +1,18 @@
 {
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true
+  },
   "extends": "steelbrain",
+  "plugins": [
+    "dollar-sign",
+    "jquery"
+  ],
   "rules": {
     "semi": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "dollar-sign/dollar-sign": "warn"
   }
 }

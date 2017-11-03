@@ -1,5 +1,3 @@
-// Extension from webpack.config.js
-
 const WebpackStrip = require('strip-loader');
 const baseConfig = require('./webpack.config.js');
 

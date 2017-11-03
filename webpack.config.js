@@ -21,15 +21,23 @@ const extractSassPlugin = new ExtractTextPlugin({
   allChunks: true,
 });
 
+const providePlugin = new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  'window.jQuery': 'jquery',
+});
+
 module.exports = {
   entry: entriesJs,
   output: {
     path: path.resolve(__dirname, 'wwwroot'),
+    publicPath: '/wwwroot/assets',
     filename: '[name].js',
   },
   module: {
     rules: [{
       test: /\.scss$/,
+      exclude: /node_modules/,
       use: extractSassPlugin.extract({
         use: [{
           loader: 'css-loader',
@@ -50,7 +58,7 @@ module.exports = {
       use: 'eslint-loader',
     }, {
       test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
+      exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
         options: {
@@ -59,13 +67,21 @@ module.exports = {
       },
     }, {
       test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.eot$/,
-      use: 'url-loader',
+      exclude: /node_modules/,
+      use: 'url-loader?limit=100000',
     }, {
       test: /\.txt$/,
+      exclude: /node_modules/,
       use: 'raw-loader',
     }],
   },
   resolve: {
+    alias: {
+      Images: path.resolve(__dirname, 'assets/images'),
+      Fonts: path.resolve(__dirname, 'assets/fonts'),
+      Styles: path.resolve(__dirname, 'assets/styles'),
+      Scripts: path.resolve(__dirname, 'assets/scripts'),
+    },
     extensions: ['*', '.js'],
     modules: ['Views/', 'node_modules'],
   },
