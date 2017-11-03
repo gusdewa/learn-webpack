@@ -1,9 +1,9 @@
 // Extension from webpack.config.js
 
-var WebpackStrip = require('strip-loader');
-var baseConfig = require('./webpack.config.js');
+const WebpackStrip = require('strip-loader');
+const baseConfig = require('./webpack.config.js');
 
-var stripLoader = {
+const stripLoader = {
   test: [/|.js$/],
   exclude: /node_module/,
   use: WebpackStrip.loader('console.log'),
