@@ -6,6 +6,6 @@ const printConsole = () => {
   console.log(`The value from module 1 is ${module1.value}`);
 };
 
-$('#pickme').text('Hohohoho');
+$('#pickme').text('2');
 
 printConsole();

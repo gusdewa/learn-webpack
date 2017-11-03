@@ -1,5 +1,5 @@
 const WebpackStrip = require('strip-loader');
-const baseConfig = require('./webpack.config.js');
+const baseConfig = require('./webpack.dev.js');
 
 const stripLoader = {
   test: [/|.js$/],
